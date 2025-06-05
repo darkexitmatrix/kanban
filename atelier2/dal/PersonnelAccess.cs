@@ -1,9 +1,10 @@
-﻿using System;
+﻿using atelier2.bddmanager;
+using atelier2.model;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using atelier2.bddmanager;
-using atelier2.model;
-using atelier2.modele;
 
 namespace atelier2.dal
 {
@@ -12,75 +13,115 @@ namespace atelier2.dal
     /// </summary>
     public class PersonnelAccess
     {
-        private readonly string chaineConnexion;
+        private readonly BddManager bddManager;
 
-        /// <summary>
-        /// Constructeur : initialise la chaîne de connexion depuis App.config.
-        /// </summary>
         public PersonnelAccess()
         {
-            chaineConnexion = ConfigurationManager.ConnectionStrings["gestionAbsences"].ConnectionString;
+
+            bddManager = BddManager.GetInstance("server=localhost;user id=root;password=;database=gestion_absences;SslMode=none");
         }
 
         /// <summary>
-        /// Récupère la liste complète des personnels.
+        /// Récupère la liste de tous les personnels.
         /// </summary>
-        /// <returns>Liste d'objets Personnel</returns>
         public List<Personnel> GetAllPersonnels()
         {
-            List<Personnel> personnels = new List<Personnel>();
-            BddManager bdd = BddManager.GetInstance(chaineConnexion);
+            string query = "SELECT idpersonnel, nom, prenom, tel, mail, idservice FROM personnel ORDER BY nom";
+            List<Personnel> liste = new List<Personnel>();
+            var records = bddManager.ReqSelect(query);
 
-            string query = @"SELECT idpersonnel, nom, prenom, tel, mail, idservice FROM personnel";
-
-            List<object[]> resultats = bdd.ReqSelect(query);
-
-            foreach (object[] ligne in resultats)
+            foreach (var row in records)
             {
                 Personnel p = new Personnel(
-                    Convert.ToInt32(ligne[0]),
-                    ligne[1].ToString(),
-                    ligne[2].ToString(),
-                    ligne[3].ToString(),
-                    ligne[4].ToString(),
-                    Convert.ToInt32(ligne[5])
+                    Convert.ToInt32(row[0]),
+                    row[1].ToString(),
+                    row[2].ToString(),
+                    row[3].ToString(),
+                    row[4].ToString(),
+                    Convert.ToInt32(row[5])
                 );
-                personnels.Add(p);
+                liste.Add(p);
             }
 
-            return personnels;
+            return liste;
         }
 
         /// <summary>
-        /// Récupère un personnel par son identifiant.
+        /// Ajoute un nouveau personnel à la base de données.
         /// </summary>
-        /// <param name="id">ID du personnel</param>
-        /// <returns>Un objet Personnel ou null si non trouvé</returns>
-        public Personnel GetPersonnelById(int id)
+        public void AjouterPersonnel(Personnel personnel)
         {
-            BddManager bdd = BddManager.GetInstance(chaineConnexion);
+            string query = @"INSERT INTO personnel (nom, prenom, tel, mail, idservice)
+                             VALUES (@nom, @prenom, @tel, @mail, @idservice)";
 
-            string query = @"SELECT idpersonnel, nom, prenom, tel, mail, idservice 
-                             FROM personnel 
-                             WHERE idpersonnel = @id";
-
-            var parameters = new Dictionary<string, object> { { "@id", id } };
-            List<object[]> resultats = bdd.ReqSelect(query, parameters);
-
-            if (resultats.Count > 0)
+            var parameters = new Dictionary<string, object>
             {
-                object[] ligne = resultats[0];
-                return new Personnel(
-                    Convert.ToInt32(ligne[0]),
-                    ligne[1].ToString(),
-                    ligne[2].ToString(),
-                    ligne[3].ToString(),
-                    ligne[4].ToString(),
-                    Convert.ToInt32(ligne[5])
-                );
-            }
+                { "@nom", personnel.Nom },
+                { "@prenom", personnel.Prenom },
+                { "@tel", personnel.Tel },
+                { "@mail", personnel.Mail },
+                { "@idservice", personnel.IdService }
+            };
 
-            return null;
+            bddManager.ReqUpdate(query, parameters);
         }
+        /// <summary>
+        /// Met à jour les informations d’un personnel existant.
+        /// </summary>
+        /// <param name="personnel">Objet Personnel contenant les nouvelles données</param>
+        public void UpdatePersonnel(Personnel personnel)
+        {
+            string query = "UPDATE personnel SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice WHERE idpersonnel = @id";
+
+            var parameters = new Dictionary<string, object>
+    {
+        { "@nom", personnel.Nom },
+        { "@prenom", personnel.Prenom },
+        { "@tel", personnel.Tel },
+        { "@mail", personnel.Mail },
+        { "@idservice", personnel.IdService },
+        { "@id", personnel.IdPersonnel }
+    };
+
+            bddManager.ReqUpdate(query, parameters);
+        }
+        public bool ModifierPersonnel(Personnel personnel)
+        {
+            string query = @"UPDATE personnel
+                     SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice
+                     WHERE idpersonnel = @id";
+
+            var parameters = new Dictionary<string, object>
+    {
+        {"@nom", personnel.Nom},
+        {"@prenom", personnel.Prenom},
+        {"@tel", personnel.Tel},
+        {"@mail", personnel.Mail},
+        {"@idservice", personnel.IdService},
+            {"@id", personnel.IdPersonnel}
+        };
+
+            try
+            {
+                bddManager.ReqUpdate(query, parameters);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public void SupprimerPersonnel(int id)
+        {
+            string req = "DELETE FROM personnel WHERE idpersonnel = @id";
+            Dictionary<string, object> parameters = new()
+            {
+                { "@id", id }
+            };
+            bddManager.ReqUpdate(req, parameters);
+        }
+
     }
 }

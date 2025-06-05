@@ -58,16 +58,43 @@
             Classe d’accès aux données pour le personnel.
             </summary>
         </member>
-        <member name="M:atelier2.dal.PersonnelAccess.#ctor">
+        <member name="M:atelier2.dal.PersonnelAccess.GetAllPersonnels">
             <summary>
-            Constructeur : initialise la chaîne de connexion depuis App.config.
+            Récupère la liste de tous les personnels.
             </summary>
         </member>
-        <member name="M:atelier2.dal.PersonnelAccess.GetConnectionString">
+        <member name="M:atelier2.dal.PersonnelAccess.AjouterPersonnel(atelier2.model.Personnel)">
             <summary>
-            Retourne la chaîne de connexion actuelle.
+            Ajoute un nouveau personnel à la base de données.
             </summary>
-            <returns>Chaîne de connexion MySQL</returns>
+        </member>
+        <member name="M:atelier2.dal.PersonnelAccess.UpdatePersonnel(atelier2.model.Personnel)">
+            <summary>
+            Met à jour les informations d’un personnel existant.
+            </summary>
+            <param name="personnel">Objet Personnel contenant les nouvelles données</param>
+        </member>
+        <member name="T:atelier2.dal.ServiceAccess">
+            <summary>
+            Classe d'accès aux données pour les services.
+            </summary>
+        </member>
+        <member name="M:atelier2.dal.ServiceAccess.#ctor">
+            <summary>
+            Constructeur : initialise la connexion à la base de données.
+            </summary>
+        </member>
+        <member name="M:atelier2.dal.ServiceAccess.GetAllServices">
+            <summary>
+            Récupère tous les services depuis la base de données.
+            </summary>
+            <returns>Liste des services</returns>
+        </member>
+        <member name="M:atelier2.FrmPersonnel.Dispose(System.Boolean)">
+            <summary>
+            Libération des ressources utilisées.
+            </summary>
+            <param name="disposing">true si les ressources doivent être supprimées ; sinon, false.</param>
         </member>
         <member name="T:atelier2.model.Absence">
             <summary>
@@ -99,26 +126,49 @@
         </member>
         <member name="T:atelier2.model.Personnel">
             <summary>
-            Représente un personnel.
+            Représente un personnel de l'organisation.
             </summary>
         </member>
         <member name="P:atelier2.model.Personnel.IdPersonnel">
-            <summary>Identifiant du personnel</summary>
+            <summary>
+            Obtient ou définit l'identifiant du personnel.
+            </summary>
         </member>
         <member name="P:atelier2.model.Personnel.Nom">
-            <summary>Nom du personnel</summary>
+            <summary>
+            Obtient ou définit le nom du personnel.
+            </summary>
         </member>
         <member name="P:atelier2.model.Personnel.Prenom">
-            <summary>Prénom du personnel</summary>
+            <summary>
+            Obtient ou définit le prénom du personnel.
+            </summary>
         </member>
         <member name="P:atelier2.model.Personnel.Tel">
-            <summary>Téléphone</summary>
+            <summary>
+            Obtient ou définit le numéro de téléphone du personnel.
+            </summary>
         </member>
         <member name="P:atelier2.model.Personnel.Mail">
-            <summary>Mail</summary>
+            <summary>
+            Obtient ou définit l'adresse mail du personnel.
+            </summary>
         </member>
         <member name="P:atelier2.model.Personnel.IdService">
-            <summary>Identifiant du service</summary>
+            <summary>
+            Obtient ou définit l'identifiant du service auquel appartient le personnel.
+            </summary>
+        </member>
+        <member name="M:atelier2.model.Personnel.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Initialise une nouvelle instance de la classe <see cref="T:atelier2.model.Personnel"/>.
+            </summary>
+            <param name="id">Identifiant du personnel</param>
+            <param name="nom">Nom</param>
+            <param name="prenom">Prénom</param>
+            <param name="tel">Téléphone</param>
+            <param name="mail">Adresse mail</param>
+            <param name="idService">Identifiant du service</param>
         </member>
         <member name="T:atelier2.model.Responsable">
             <summary>
@@ -133,14 +183,8 @@
         </member>
         <member name="T:atelier2.model.Service">
             <summary>
-            Représente un service dans l'organisation.
+            Représente un service
             </summary>
-        </member>
-        <member name="P:atelier2.model.Service.IdService">
-            <summary>Identifiant du service</summary>
-        </member>
-        <member name="P:atelier2.model.Service.Nom">
-            <summary>Nom du service</summary>
         </member>
         <member name="M:atelier2.Program.Main">
             <summary>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("atelier2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cde963fe40631ac6a50f51aaf23ced6df5174de9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb6eb2cf43ad0305ab54d07433e939ec3451e871")]
 [assembly: System.Reflection.AssemblyProductAttribute("atelier2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("atelier2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

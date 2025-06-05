@@ -1,20 +1,22 @@
 ﻿namespace atelier2.model
 {
     /// <summary>
-    /// Représente un service dans l'organisation.
+    /// Représente un service
     /// </summary>
     public class Service
     {
-        /// <summary>Identifiant du service</summary>
         public int IdService { get; set; }
-
-        /// <summary>Nom du service</summary>
         public string Nom { get; set; }
 
-        public Service(int idService, string nom)
+        public Service(int id, string nom)
         {
-            IdService = idService;
+            IdService = id;
             Nom = nom;
+        }
+
+        public override string ToString()
+        {
+            return Nom;
         }
     }
 }
