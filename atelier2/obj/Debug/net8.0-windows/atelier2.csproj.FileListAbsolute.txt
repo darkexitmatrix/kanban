@@ -1,0 +1,16 @@
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.FrmConnexion.resources
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.csproj.GenerateResource.cache
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.AssemblyInfoInputs.cache
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.AssemblyInfo.cs
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.csproj.CoreCompileInputs.cache
+D:\C#\atelier2\atelier2\bin\Debug\net8.0-windows\atelier2.exe
+D:\C#\atelier2\atelier2\bin\Debug\net8.0-windows\atelier2.deps.json
+D:\C#\atelier2\atelier2\bin\Debug\net8.0-windows\atelier2.runtimeconfig.json
+D:\C#\atelier2\atelier2\bin\Debug\net8.0-windows\atelier2.dll
+D:\C#\atelier2\atelier2\bin\Debug\net8.0-windows\atelier2.pdb
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.dll
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\refint\atelier2.dll
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.pdb
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\atelier2.genruntimeconfig.cache
+D:\C#\atelier2\atelier2\obj\Debug\net8.0-windows\ref\atelier2.dll
