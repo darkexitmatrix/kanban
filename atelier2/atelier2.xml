@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>atelier2</name>
+    </assembly>
+    <members>
+        <member name="T:atelier2.bddmanager.BddManager">
+            <summary>
+            Singleton : gère la connexion à la base de données et l'exécution des requêtes SQL.
+            </summary>
+        </member>
+        <member name="F:atelier2.bddmanager.BddManager.instance">
+            <summary>
+            Instance unique de la classe BddManager.
+            </summary>
+        </member>
+        <member name="F:atelier2.bddmanager.BddManager.connection">
+            <summary>
+            Objet de connexion MySQL.
+            </summary>
+        </member>
+        <member name="M:atelier2.bddmanager.BddManager.#ctor(System.String)">
+            <summary>
+            Constructeur privé : initialise la connexion à la base et l’ouvre.
+            </summary>
+            <param name="stringConnect">Chaîne de connexion MySQL</param>
+        </member>
+        <member name="M:atelier2.bddmanager.BddManager.GetInstance(System.String)">
+            <summary>
+            Méthode d’accès à l’instance unique de BddManager.
+            </summary>
+            <param name="stringConnect">Chaîne de connexion</param>
+            <returns>Instance unique de BddManager</returns>
+        </member>
+        <member name="M:atelier2.bddmanager.BddManager.ReqControle(System.String)">
+            <summary>
+            Exécute une requête de type contrôle (ex : begin transaction, commit, rollback).
+            </summary>
+            <param name="stringQuery">Requête SQL</param>
+        </member>
+        <member name="M:atelier2.bddmanager.BddManager.ReqUpdate(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Exécute une requête de type mise à jour (insert, update, delete).
+            </summary>
+            <param name="stringQuery">Requête SQL</param>
+            <param name="parameters">Paramètres de la requête (facultatif)</param>
+        </member>
+        <member name="M:atelier2.bddmanager.BddManager.ReqSelect(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Exécute une requête de sélection (select).
+            </summary>
+            <param name="stringQuery">Requête SQL</param>
+            <param name="parameters">Paramètres de la requête (facultatif)</param>
+            <returns>Liste de tableaux d’objets correspondant aux lignes du résultat</returns>
+        </member>
+        <member name="T:atelier2.dal.PersonnelAccess">
+            <summary>
+            Classe d’accès aux données pour le personnel.
+            </summary>
+        </member>
+        <member name="M:atelier2.dal.PersonnelAccess.#ctor">
+            <summary>
+            Constructeur : initialise la chaîne de connexion depuis App.config.
+            </summary>
+        </member>
+        <member name="M:atelier2.dal.PersonnelAccess.GetConnectionString">
+            <summary>
+            Retourne la chaîne de connexion actuelle.
+            </summary>
+            <returns>Chaîne de connexion MySQL</returns>
+        </member>
+        <member name="T:atelier2.model.Absence">
+            <summary>
+            Représente une absence d'un personnel.
+            </summary>
+        </member>
+        <member name="P:atelier2.model.Absence.IdPersonnel">
+            <summary>Identifiant du personnel lié à l'absence</summary>
+        </member>
+        <member name="P:atelier2.model.Absence.DateDebut">
+            <summary>Date de début de l'absence</summary>
+        </member>
+        <member name="P:atelier2.model.Absence.DateFin">
+            <summary>Date de fin de l'absence</summary>
+        </member>
+        <member name="P:atelier2.model.Absence.IdMotif">
+            <summary>Identifiant du motif de l'absence</summary>
+        </member>
+        <member name="T:atelier2.model.Motif">
+            <summary>
+            Représente un motif d'absence (maladie, vacances, etc.).
+            </summary>
+        </member>
+        <member name="P:atelier2.model.Motif.IdMotif">
+            <summary>Identifiant du motif</summary>
+        </member>
+        <member name="P:atelier2.model.Motif.Libelle">
+            <summary>Libellé du motif</summary>
+        </member>
+        <member name="T:atelier2.model.Personnel">
+            <summary>
+            Représente un personnel.
+            </summary>
+        </member>
+        <member name="P:atelier2.model.Personnel.IdPersonnel">
+            <summary>Identifiant du personnel</summary>
+        </member>
+        <member name="P:atelier2.model.Personnel.Nom">
+            <summary>Nom du personnel</summary>
+        </member>
+        <member name="P:atelier2.model.Personnel.Prenom">
+            <summary>Prénom du personnel</summary>
+        </member>
+        <member name="P:atelier2.model.Personnel.Tel">
+            <summary>Téléphone</summary>
+        </member>
+        <member name="P:atelier2.model.Personnel.Mail">
+            <summary>Mail</summary>
+        </member>
+        <member name="P:atelier2.model.Personnel.IdService">
+            <summary>Identifiant du service</summary>
+        </member>
+        <member name="T:atelier2.model.Responsable">
+            <summary>
+            Représente le responsable de l'application (authentification).
+            </summary>
+        </member>
+        <member name="P:atelier2.model.Responsable.Login">
+            <summary>Login du responsable</summary>
+        </member>
+        <member name="P:atelier2.model.Responsable.Pwd">
+            <summary>Mot de passe du responsable (hashé en SHA2)</summary>
+        </member>
+        <member name="T:atelier2.model.Service">
+            <summary>
+            Représente un service dans l'organisation.
+            </summary>
+        </member>
+        <member name="P:atelier2.model.Service.IdService">
+            <summary>Identifiant du service</summary>
+        </member>
+        <member name="P:atelier2.model.Service.Nom">
+            <summary>Nom du service</summary>
+        </member>
+        <member name="M:atelier2.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:atelier2.ApplicationConfiguration">
+            <summary>
+             Bootstrap the application configuration.
+            </summary>
+        </member>
+        <member name="M:atelier2.ApplicationConfiguration.Initialize">
+            <summary>
+             Bootstrap the application as follows:
+             <code>
+             global::System.Windows.Forms.Application.EnableVisualStyles();
+             global::System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+             global::System.Windows.Forms.Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            </code>
+            </summary>
+        </member>
+    </members>
+</doc>
